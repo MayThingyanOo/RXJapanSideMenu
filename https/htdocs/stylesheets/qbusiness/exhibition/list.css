@@ -1,0 +1,558 @@
+.qb-bg-img {
+  background-image: none;
+}
+
+.qb-exhibition-list-wrapper table {
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.qb-exhibition-list .corner-left {
+  border-radius: 10px 0 0 0;
+}
+
+.qb-exhibition-list .corner-right {
+  border-radius: 0 10px 0 0;
+}
+
+.qb-exhibition-list .corner-bottom {
+  border-radius: 0 0 3px 3px;
+}
+
+.qb-exhibition-list thead.header tr td,
+.qb-exhibition-list thead.header tr th {
+  overflow: hidden;
+  font-weight: 500;
+  background-color: #00a6ff;
+}
+
+.qb-exhibition-list thead.header tr th.open-btn,
+.qb-exhibition-list thead.header tr td.group-name,
+.qb-exhibition-list thead.header tr th.group-name {
+  text-align: left;
+}
+
+.qb-exhibition-list-open-btn {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.qb-exhibition-list-open-btn:hover,
+.qb-exhibition-list-open-btn:focus {
+  text-decoration: none;
+}
+
+.qb-exhibition-list tbody>tr>td,
+.qb-exhibition-list tbody>tr>th {
+  padding: 0;
+  margin: 0;
+}
+
+.qb-exhibition-list-body tr td {
+  padding: 0;
+}
+
+.qb-exhibition-list.qb-open .qb-exhibition-list-body {
+  display: block;
+}
+
+.qb-exhibition-list .qb-exhibition-list-body {
+  display: none;
+}
+
+.qb-exhibition-function tr>td:first-child {
+  width: 150px;
+  font-size: 13px;
+}
+
+.qb-exhibition-function .modal-error-msg .qb-error-box {
+  min-height: 18px;
+}
+
+.qb-exhibition-function .vertical-top {
+  vertical-align: top;
+}
+
+.qb-exhibition-function .vertical-top.pt25 {
+  padding-top: 25px !important;
+}
+
+.qb-exhibition-function .show-functions {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.setting-edit {
+  top: 35px;
+  right: -55px;
+  left: auto;
+  min-width: 280px;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #3b4043;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 200;
+  padding: 0;
+  z-index: 1000;
+}
+
+.event-edit {
+    top: auto;
+    right: -68px;
+    left: auto;
+    min-width: 280px;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #3B4043;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 200;
+    padding: 0;
+    z-index: 1000;
+}
+
+.setting-edit li {
+  text-align: left;
+  padding: 10px;
+}
+
+.setting-edit li:not(:last-child) {
+  border-bottom: 1px solid #d6dee5;
+}
+
+.event-edit li:last-child {
+  border-top: 1px solid #d6dee5;
+}
+
+.event-edit li {
+  text-align: left;
+  padding: 10px;
+}
+
+.setting-edit li:hover,
+.event-edit li:hover {
+  background-color: #00a6ff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.qb-exhibition-list-wrapper {
+  margin: 0 0 20px;
+}
+
+.qb-exhibition-list {
+  border: none;
+  width: 100%;
+  border-collapse: separate;
+  background-color: #00a6ff;
+}
+
+h1.exhibition-list-top {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  text-align: left;
+  color: #313e51;
+}
+
+.qb-exhibition-line .qb-exhibition-list-id,
+.qb-exhibition-line .qb-exhibition-name {
+  text-decoration: underline;
+}
+
+.open .setting-edit:before,
+.open .setting-edit:after {
+  border: medium solid transparent;
+  bottom: 100%;
+  content: " ";
+  height: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+}
+
+.open .event-edit:before,
+.open .event-edit:after {
+  border: medium solid transparent;
+  bottom: 100%;
+  content: " ";
+  height: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+}
+
+.open .setting-edit:before {
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #fff;
+  border-width: 14px;
+  margin-left: -8px;
+  right: 80px;
+}
+
+.open .event-edit:before {
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #fff;
+  border-width: 14px;
+  margin-left: -8px;
+  right: 125px;
+}
+
+.open .qb-dropdown-menu-white:after {
+  border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgb(255, 255, 255);
+  border-width: 6px;
+  margin-left: -8px;
+  right: 19px;
+  top: -12px;
+}
+
+.open .qb-dropdown-menu-white:before {
+  border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(1, 172, 243, 1);
+  border-width: 8px;
+  margin-left: -8px;
+  right: 17px;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+}
+
+.qb-add-btn-large {
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 33px;
+  padding: 1px 37px 2px 23px;
+  text-decoration: none;
+  vertical-align: text-top;
+  margin-top: 20px;
+  background-color: #00a6ff !important;
+  position: relative;
+}
+
+.qb-add-btn-large:hover,
+.qb-add-btn-large:focus {
+  text-decoration: none;
+  background-color: #0a99d5;
+  color: #fff;
+}
+
+.qb-add-btn-large::after {
+  content: "+";
+  font-size: 28px;
+  display: inline-block;
+  position: absolute;
+  top: -1px;
+  right: 16px;
+}
+
+.qb-exhibition-inner-list tbody tr.row-add-schedule,
+.qb-exhibition-inner-list tbody tr.row-add-schedule th {
+  background-color: #fff !important;
+  cursor: auto;
+}
+
+.qb-exhibition-inner-list tbody tr.row-add-schedule th {
+  padding: 10px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.button-add {
+  float: right;
+}
+
+.qb-event-text {
+  width: 86%;
+  text-align: left;
+  min-height: 36px;
+  line-height: 23px;
+  margin: 15px 0px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.event-label {
+  color: #333;
+  font-weight: 200;
+  float: left;
+  padding-left: 40px;
+}
+
+.event-title {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.qb-notification-text {
+  white-space: pre-wrap;
+}
+
+.exhibition_group_edit.form-horizontal.form-modal-input {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.qb-btn {
+  color: #fff;
+  background-color: #00a6ff;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.btn-create {
+  margin: 0px;
+}
+
+.qb-exhibition-list .header .border {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 6px 12px;
+  width: 110px;
+}
+
+.qb-exhibition-list .header,
+.qb-exhibition-list .header a {
+  color: #fff;
+}
+
+.event-head-title {
+  margin-bottom: 12px;
+}
+
+.qb-exhibition-list-header th:nth-child(1) {
+  width: 50%;
+}
+
+.qb-exhibition-list-header th:nth-child(2) {
+  width: 15%;
+  text-align: center;
+}
+
+.qb-exhibition-list-header th:nth-child(3) {
+  width: 15%;
+  text-align: center;
+}
+
+.qb-exhibition-list-header th:nth-child(4) {
+  width: 12%;
+  overflow: visible !important;
+  text-align: center;
+}
+
+.qb-exhibition-list-header th:last-child {
+  width: 8%;
+}
+
+.qb-exhibition-list-header .fz-xlg {
+  font-size: 32px;
+  font-weight: normal;
+}
+
+.qb-exhibition-list-header .arrow {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-top: solid 3px #fff;
+  border-right: solid 3px #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  margin: 0 auto;
+}
+
+.qb-exhibition-list-header .arrow {
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+.qb-open .qb-exhibition-list-header .arrow {
+  transform: rotate(-45deg);
+}
+
+.qb-exhibition-list-header .group-name {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.qb-exhibition-list-header .flex {
+  list-style: none;
+  display: flex;
+  width: auto;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.qb-exhibition-list-header .flex li {
+  flex-flow: row wrap;
+  justify-content: space-between;
+  font-size: 14px;
+  position: relative;
+}
+
+.qb-exhibition-list-header .flex li:not(:last-child)::after {
+  content: "|";
+  padding: 0 5px;
+}
+
+.qb-exhibition-list-header p {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.qb-exhibition-list-header>th {
+  position: relative;
+}
+
+.qb-exhibition-list-header>th:not(:last-child)::after {
+  content: "";
+  height: 50px;
+  border-right: 1px solid #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  right: 0px;
+}
+
+.qb-exhibition-list tbody {
+  background-color: #fff;
+}
+
+.qb-exhibition-inner-list .border {
+  border: 1px solid #00a6ff;
+  border-radius: 5px;
+  padding: 3px 10px;
+}
+
+.qb-exhibition-inner-list tbody tr:hover,
+.qb-exhibition-inner-list tbody td:hover {
+  cursor: pointer;
+}
+
+.qb-exhibition-inner-list {
+  padding: 20px;
+}
+
+.qb-exhibition-inner-list>p {
+  font-size: 18px;
+  color: #4d4f5c;
+}
+
+.qb-exhibition-inner-list table {
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid #d6dee5;
+}
+
+.qb-exhibition-inner-list .fz-lg {
+  font-size: 24px;
+}
+
+.qb-exhibition-inner-list .label {
+  font-size: 14px;
+  border-radius: 5px;
+  min-width: 59px;
+}
+
+.qb-exhibition-inner-list .event-ttl {
+  flex: 1;
+  display: inline-block;
+  padding-left: 15px;
+}
+
+.qb-exhibition-inner-list table tbody td .venue {
+  display: flex;
+  align-items: center;
+  height: auto;
+}
+
+.qb-exhibition-inner-list table thead th,
+.qb-exhibition-inner-list table tbody td {
+  border: 1px solid #d6dee5;
+  padding: 12px 8px;
+}
+
+.qb-exhibition-inner-list table th {
+  color: #313e51;
+  font-weight: 400;
+  background-color: #eff2f7;
+  text-align: center;
+}
+
+.qb-exhibition-inner-list table thead th:nth-child(1) {
+  width: 100px;
+}
+
+.qb-exhibition-inner-list table thead th:nth-child(2) {
+  width: 400px;
+}
+
+.qb-exhibition-inner-list table thead th:nth-child(3) {
+  width: 350px;
+}
+
+.qb-exhibition-inner-list table thead th:nth-child(4) {
+  width: 147.5px;
+}
+
+.qb-exhibition-inner-list table thead th:nth-child(5) {
+  width: 147.5px;
+}
+
+.qb-exhibition-inner-list table thead th:nth-child(6) {
+  width: 100px;
+}
+
+.qb-exhibition-inner-list table tbody td a {
+  color: #00a6ff;
+}
+
+.ex_group_copy {
+  border-top: 1px solid #d6dee5;
+}
+
+._can_delete_visitor {
+  border-bottom: 1px solid #d6dee5;
+}
+
+.visitor_delete_disable {
+  opacity: 0.5;
+}
+
+.qb-exhibition-list thead.header tr.qb-exhibition-list-header:hover {
+  cursor: pointer;
+}
+
+.dis-none {
+  display: none;
+}
+
+.group-name {
+  margin-top: 14px !important;
+}
+
+.qb-tooltip-link .material-icons.help.icon-v-middle {
+  vertical-align: middle;
+}
+
+.form-group.has-error label.control-label {
+  color: #313E51;
+}
+
+.qb-collapsed .dropdown-menu {
+  display: none;
+}
+
+@media screen and (max-width: 1520px) {
+  .qb-exhibition-list-header .fz-xlg_ttl {
+    display: block;
+    margin: 0 0 5px;
+  }
+}

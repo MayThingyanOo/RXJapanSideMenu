@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('/fonts/icomoon.eot?ta2p8e');
+    src:  url('/fonts/icomoon.eot?ta2p8e#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?ta2p8e') format('truetype'),
+    url('/fonts/icomoon.woff?ta2p8e') format('woff'),
+    url('/fonts/icomoon.svg?ta2p8e#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="qb-icon-"], [class*=" qb-icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sizeL {
+    font-size: 3rem;
+}
+
+.qb-icon-info:before {
+    content: "\ea0c";
+}
+.qb-icon-spot-1:before {
+    content: "\e900";
+}
+.qb-icon-spot-2:before {
+    content: "\ea14";
+}
+.qb-icon-spot-3:before {
+    content: "\ea10";
+}
+.qb-icon-seminar:before {
+    content: "\ea10";
+}
+.qb-icon-arrow-up:before {
+    content: "\ea41";
+}
+.qb-icon-arrow-down:before {
+    content: "\ea43";
+}
+
+.icon-file-text2:before {
+    content: "\e926";
+}
+.icon-plus:before {
+    content: "\ea0a";
+}
