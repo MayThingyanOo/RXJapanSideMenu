@@ -1,0 +1,48 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        #Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    #authorization
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+<ifModule mod_headers.c>
+#    Header set Access-Control-Allow-Origin: *
+
+#    Header set Referrer-Policy "no-referrer, strict-origin-when-cross-origin"
+#    Header set Cache-Control "max-age=31536000"
+#    Header set X-Frame-Options SAMEORIGIN
+#    Header set X-XSS-Protection "1; mode=block"
+#    Header set X-Content-Type-Options nosniff
+#    Header set content-security-policy "default-src 'none'; connect-src 'self' http://127.0.0.1:8000 https://adobeid-na1.services.adobe.com https://www.e-uketsuke.jp; object-src 'self'; font-src 'self'; frame-ancestors 'none'; img-src 'self' https://s3.ap-northeast-1.amazonaws.com; script-src 'self' https://static.adobelogin.com https://pt01.mul-pay.jp; style-src 'self' 'unsafe-inline' "
+#    Header set Strict-Transport-Security "max-age=63072000"
+
+#    Header set X-Frame-Options SAMEORIGIN
+#    Header set X-XSS-Protection "1; mode=block"
+#    Header set X-Content-Type-Options nosniff
+#    Header set Content-Security-Policy "default-src *; img-src * 'self' data: platform.twitter.com cdn.syndication.twimg.com ton.twimg.com; style-src 'self' 'unsafe-inline' 'unsafe-eval' twitter.com platform.twitter.com cdn.syndication.twimg.com ton.twimg.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' twitter.com platform.twitter.com cdn.syndication.twimg.com ton.twimg.com"
+
+    <filesMatch "(material\.js|date.format\.js|scope\.js|bootbox\.js|jquery\.validate\.js|material\.css|material-icons\.css|font-icomoon\.css|font-source-han-sans-japanese\.css|non-responsive\.css|responsive\.css|util\.css)$">
+        Header unset Vary
+        Header set Cache-Control "max-age=60"
+    </filesMatch>
+    <filesMatch "\.(woff|ttf|ttc|otf|eot|svg|png|jpg|ico|gif|woff2|min.css|min.js)$">
+        Header unset Vary
+        Header set Cache-Control "max-age=86400"
+    </filesMatch>
+    <filesMatch "\.(woff|ttf|ttc|otf|eot|woff2)$">
+        Header set Cache-Control "max-age=604800"
+    </filesMatch>
+</ifModule>
