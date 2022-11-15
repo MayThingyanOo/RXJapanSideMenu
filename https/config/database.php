@@ -6,6 +6,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | PDO Fetch Style
+    |--------------------------------------------------------------------------
+    |
+    | By default, database results will be returned as instances of the PHP
+    | stdClass object; however, you may desire to retrieve records in an
+    | array format for simplicity. Here you can tweak the fetch style.
+    |
+     */
+    'fetch' => PDO::FETCH_CLASS,
+
+    /*
+    |--------------------------------------------------------------------------
     | Default Database Connection Name
     |--------------------------------------------------------------------------
     |
@@ -74,7 +86,22 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'schema' => 'public',
+            'schema' => env('DB_SCHEMA', 'public'),
+            'sslmode' => 'prefer',
+        ],
+
+        'qpass' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_QPASS_HOST', '127.0.0.1'),
+            'port' => env('DB_QPASS_PORT', '5432'),
+            'database' => env('DB_QPASS_DATABASE', 'forge'),
+            'username' => env('DB_QPASS_USERNAME', 'forge'),
+            'password' => env('DB_QPASS_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'schema' => env('DB_QPASS_SCHEMA', 'public'),
             'sslmode' => 'prefer',
         ],
 
