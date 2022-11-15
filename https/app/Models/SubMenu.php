@@ -15,5 +15,7 @@ class SubMenu extends Model
         'label',
         'link',
         'image_name',
+        'language_ja_flag',
+        'orderBy'
     ];
 }

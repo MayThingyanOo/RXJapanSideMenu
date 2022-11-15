@@ -13,11 +13,13 @@ class CreateMainMenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('main_menu', function (Blueprint $table) {
+        Schema::create('main_menus', function (Blueprint $table) {
             $table->increments('main_menu_id');
             $table->integer('exhibition_id');
             $table->string('name', 255);
             $table->string('color', 20);
+            $table->boolean('language_ja_flag');
+            $table->smallInteger('orderBy');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->integer('deleted_by')->nullable();
@@ -31,6 +33,6 @@ class CreateMainMenuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('main_menu');
+        Schema::dropIfExists('main_menus');
     }
 }

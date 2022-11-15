@@ -13,19 +13,21 @@ class CreateSubMenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_menu', function (Blueprint $table) {
+        Schema::create('sub_menus', function (Blueprint $table) {
             $table->increments('sub_menu_id');
             $table->integer('main_menu_id');
             $table->string('label', 255)->nullable();
             $table->string('link', 255)->nullable();
             $table->string('image_name', 255)->nullable();
+            $table->boolean('language_ja_flag');
+            $table->smallInteger('orderBy');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->integer('deleted_by')->nullable();
 
             $table->foreign('main_menu_id')
                 ->references('main_menu_id')
-                ->on('main_menu')
+                ->on('main_menus')
                 ->onDelete("cascade");
         });
     }
@@ -37,6 +39,6 @@ class CreateSubMenuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_menu');
+        Schema::dropIfExists('sub_menus');
     }
 }

@@ -13,7 +13,7 @@ class CreateFooterTable extends Migration
      */
     public function up()
     {
-        Schema::create('footer', function (Blueprint $table) {
+        Schema::create('footers', function (Blueprint $table) {
             $table->increments('footer_id');
             $table->integer('exhibition_id');
             $table->string('email', 255)->unique();
@@ -31,6 +31,6 @@ class CreateFooterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('footer');
+        Schema::dropIfExists('footers');
     }
 }

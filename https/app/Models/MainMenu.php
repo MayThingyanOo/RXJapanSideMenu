@@ -14,5 +14,7 @@ class MainMenu extends Model
         'exhibition_id',
         'name',
         'color',
+        'language_ja_flag',
+        'orderBy'
     ];
 }
