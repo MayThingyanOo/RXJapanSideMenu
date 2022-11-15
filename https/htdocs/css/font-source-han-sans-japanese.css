@@ -1,0 +1,12 @@
+@font-face { 
+    font-family: source-han-sans-japanese;
+    font-style: normal;
+    font-weight: 200; 
+    src: url('../fonts/SourceHanSansJP-Light.otf');
+}
+@font-face {
+    font-family: source-han-sans-japanese;
+    font-style: normal;
+    font-weight: 400; 
+    src: url('../fonts/SourceHanSansJP-Regular.otf');
+}

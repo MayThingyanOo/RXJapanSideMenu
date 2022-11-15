@@ -1,0 +1,335 @@
+/* ---------------------------------- New Login UI ------------------------------------------------- */
+.qb-login-bg-color {
+  background-color: #eff2f7;
+}
+
+.qb-content-wrapper {
+  min-height: calc(100vh - 54px);
+  display: flex;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.login-content {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.qb-login-box {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.qb-login-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.qb-login-header .txt-password-notice {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.login-txt {
+  margin-top: 45px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.qb-login-box-body {
+  padding: 0;
+}
+
+.qb-login-box.animation,
+.news.animation {
+  opacity: 0;
+  transition: opacity 1s, transform 1s;
+  transform: translateY(-50px);
+}
+
+.qb-login-box.on-load-animation,
+.news.on-load-animation {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.login-box-body .alert-danger {
+  padding: 0;
+  text-align: center;
+  background-color: #fff;
+  border: none;
+  color: #ff6565;
+  font-weight: normal;
+}
+
+.login-box-body .box-container .md-gray {
+  position: relative;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  color: #939caa;
+}
+
+.login-btn-wrap {
+  text-align: center;
+}
+
+.login-btn-wrap .btn.login-btn-confirm,
+.login-btn-wrap .btn.btn-default.btn-cancel {
+  width: 120px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 9px;
+  font-weight: 500;
+}
+
+.login-btn-wrap .login-btn-confirm {
+  margin-left: 5px;
+  background-color: #00a6ff;
+  color: #fff;
+}
+
+.login-btn-wrap .btn.btn-cancel {
+  margin-right: 5px;
+  background-color: #939caa;
+}
+
+.login-back {
+  display: inline-block;
+  padding: 7px 17px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #939caa;
+  font-weight: 500;
+}
+
+.login-back:hover {
+  color: #fff;
+}
+
+.login-box-body .box-container .md-gray.font-24 {
+  font-size: 24px;
+}
+
+.qb-login-footer {
+  padding: 15px 0;
+  font-size: 12px;
+  text-align: center;
+  color: #a5aab4;
+  background-color: #fff;
+  font-weight: 400;
+}
+
+.font-normal {
+  font-weight: normal;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.login-box-body .password-issue {
+  color: #1fa6ff;
+  font-weight: normal;
+}
+
+/* ---------------------------------- Common Login UI ------------------------------------------------- */
+.login-box {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.login-box .login-box-header {
+  width: 320px;
+  height: 100%;
+  margin: 90px auto;
+  border: 1px solid #fff;
+}
+
+.login-box .login-box-header .login-logo {
+  margin-top: 38px;
+}
+
+.login-box .login-box-header .login-logo img {
+  width: 222px;
+}
+
+.login-box .login-text {
+  margin-bottom: 38px;
+}
+
+.login-box-body {
+  box-shadow: none;
+}
+
+.login-box-body form>div:nth-of-type(1),
+.login-box-body form>div:nth-of-type(2),
+.login-box-body form>.confirm_pas {
+  border: 1px solid #D6DEE5;
+  border-radius: 4px;
+}
+
+.login-box-body form>div:nth-of-type(1)>div,
+.login-box-body form>div:nth-of-type(2)>div {
+  position: relative;
+}
+
+.login-box-body form .login_id_icon,
+.login-box-body form>div:nth-of-type(1)>div>i,
+.login-box-body form>div:nth-of-type(2)>div>i {
+  position: absolute;
+  top: 6px;
+  left: 13px;
+}
+
+.login-box-body .box-body form>div:nth-of-type(2) {
+  border: none;
+}
+
+@keyframes onAutoFillStart {
+  from {}
+
+  to {}
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+  animation-name: onAutoFillStart;
+  transition: background-color 50000s ease-in-out 0s;
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+}
+
+.qb-content-bg {
+  background: #FFFFFF;
+}
+
+.qb-content-bg .qb-container {
+  max-width: 900px !important;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.qb-content-bg .form-horizontal .form-control {
+  padding: 12px 0;
+  height: 44px;
+}
+
+.qb-content-bg .form-group label.control-label {
+  font-size: 14px;
+  line-height: 1.07143;
+  font-weight: 400;
+  margin: 16px 0 0 0;
+  padding-top: 0;
+}
+
+.btn.btn-default.btn-login {
+  font-size: 14px;
+  font-weight: 200;
+  color: #00A6FF;
+  margin: 0 !important;
+}
+
+.btn.btn-default.btn-login:hover {
+  color: #00A6FF;
+  opacity: 0.7;
+}
+
+.btn.btn-primary.btn-login {
+  font-size: 16px;
+  background-color: #00A6FF;
+  color: #fff;
+  font-weight: 400;
+  padding: 13px 58px;
+  margin: 10px 0 28px;
+}
+
+.btn.btn-primary.btn-login:hover {
+  opacity: 0.7;
+  background-color: #00A6FF;
+  color: #fff;
+}
+
+.btn.btn-primary.btn-login:focus {
+  background-color: #00A6FF;
+  color: #fff;
+}
+
+.login-box-body .form-control {
+  background-image: none;
+  border: none;
+}
+
+.tooltip-guide {
+  vertical-align: top;
+  font-size: 21px;
+  color: #00A6FF;
+}
+
+.box-body .confirm-password {
+  border: 1px solid #D6DEE5 !important;
+}
+
+/* ---------------------------------- News ------------------------------------------------- */
+.news {
+  padding: 20px 30px;
+  background-color: #fff;
+}
+
+.news-header {
+  margin: 0 0 20px 0;
+}
+
+.news-text {
+  display: flex;
+}
+
+.show-news {
+  padding: 20px;
+  border: 1px solid #d6dee5;
+  text-align: left;
+  font-weight: normal;
+}
+
+.news-category {
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #939caa;
+}
+
+.short-news {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  cursor: default;
+}
+
+.short-news:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.news-detail-link {
+  color: #313e51;
+  word-break: break-all;
+}
+
+.news-detail-link:hover {
+  color: #00a6ff;
+}
+
+.news-info {
+  flex: 1 1 0;
+  /*grow | shrink | basis */
+}
+
+.news-detail-link {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
