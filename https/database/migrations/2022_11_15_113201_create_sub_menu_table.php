@@ -20,10 +20,13 @@ class CreateSubMenuTable extends Migration
             $table->string('link', 255)->nullable();
             $table->string('image_name', 255)->nullable();
             $table->timestamps();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->integer('deleted_by')->nullable();
 
-            $table->foreign('main_menu_id')->references('main_menu_id')->on('main_menu')->onDelete("cascade");
+            $table->foreign('main_menu_id')
+                ->references('main_menu_id')
+                ->on('main_menu')
+                ->onDelete("cascade");
         });
     }
 

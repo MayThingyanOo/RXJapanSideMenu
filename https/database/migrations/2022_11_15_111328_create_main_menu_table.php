@@ -19,7 +19,7 @@ class CreateMainMenuTable extends Migration
             $table->string('name', 255);
             $table->string('color', 20);
             $table->timestamps();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->integer('deleted_by')->nullable();
         });
     }
