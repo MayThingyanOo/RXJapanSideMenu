@@ -28,7 +28,7 @@ class CreateSubMenuTable extends Migration
             $table->foreign('main_menu_id')
                 ->references('main_menu_id')
                 ->on('main_menus')
-                ->onDelete("cascade");
+                ->onDelete('cascade');
         });
     }
 
