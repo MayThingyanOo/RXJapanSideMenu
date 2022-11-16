@@ -163,6 +163,11 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * cps facade provider
+         */
+        App\Lib\CpsMail\CpsMailProvider::class,
+
+        /*
          * Package Service Providers...
          */
 
