@@ -19,7 +19,6 @@ class CreateSubMenuTable extends Migration
             $table->string('label', 255)->nullable();
             $table->string('link', 255)->nullable();
             $table->string('image_name', 255)->nullable();
-            $table->boolean('language_ja_flag');
             $table->smallInteger('orderBy');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
