@@ -29,7 +29,7 @@
                     <div class="alert alert-danger mb30">{{ $errors->first('hash') }}</div>
                 @endif
 
-                <form method="post" action="" novalidate>
+                <form method="post" action="{{ route('action_remind_password') }}" novalidate>
                     {!! csrf_field() !!}
                     <input type="hidden" name="hash" value="{{ $hash }}">
 

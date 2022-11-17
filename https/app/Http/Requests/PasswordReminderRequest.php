@@ -43,40 +43,20 @@ class PasswordReminderRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'GET':
-                $rules = ['h' => 'required|max:255'];
+                $rules = [
+                    'h' => 'required|max:255|is_used|exists:qpass.staff_password_reminder,hash|is_within_ten_min'
+                ];
 
                 return $rules;
             case 'POST':
-                $rules = ['password' => 'required|max:255|min:8'];
+                $rules = [
+                    'password' => 'required|max:255|min:8|password_character_used|password_rules|confirmed',
+                    'hash' => 'required|max:255|is_used|exists:qpass.staff_password_reminder,hash|is_within_ten_min'
+                ];
 
                 return $rules;
             default:
                 return [];
         }
-    }
-
-    // not working function
-    public function response(array $errors)
-    {
-        if (isset($errors['h'][0])) {
-            Abort(404, $errors['h'][0]);
-        }
-
-        return parent::response($errors);
-    }
-
-    public function messages()
-    {
-        return ['h.required' => cps_trans('validation.password_reset.incorrect_access_url'),
-            'h.max' => cps_trans('validation.password_reset.incorrect_access_url'),
-            'h.exists' => cps_trans('validation.password_reset.incorrect_access_url'),
-            'h.is_used' => cps_trans('validation.password_reset.complete'),
-            'h.is_within_ten_min' => cps_trans('validation.password_reset.url_expired'),
-            'hash.*' => cps_trans('validation.password_reset.invalid_input')];
-    }
-
-    public function attributes()
-    {
-        return ['password' => 'パスワード'];
     }
 }

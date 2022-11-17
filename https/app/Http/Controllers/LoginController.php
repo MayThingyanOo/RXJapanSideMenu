@@ -84,4 +84,19 @@ class LoginController extends Controller
 
         return view('rxjapan.auth.reminder')->with('hash', $hash);
     }
+
+    public function actionRemindPassword(PasswordReminderRequest $request)
+    {
+        $hash = $request->hash;
+        $password = $request->password;
+
+        $this->loginService->remindPassword($hash, $password);
+
+        return redirect(route('get_complete_pw_reminder'));
+    }
+
+    public function showCompletePasswordReminder()
+    {
+        return view('rxjapan.auth.complete');
+    }
 }

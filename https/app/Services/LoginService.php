@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Staff;
 use App\Models\StaffPasswordReminder;
+use Carbon\Carbon;
 
 class LoginService
 {
@@ -52,5 +53,48 @@ class LoginService
             'staff_id' => $staff_id, 'hash' => $hash,
             'created_by' => $staff_id
         ]);
+    }
+
+    public function remindPassword($hash, $password)
+    {
+        $staff = $this->getByHashInStaffPasswordReminder($hash);
+
+        \DB::transaction(function () use ($hash, $password, $staff) {
+
+            $staff = $this->updateremindPassword($staff->staff_id, $password);
+
+            $this->setUsed($staff->staff_id, $hash);
+        });
+    }
+
+    public function getByHashInStaffPasswordReminder($hash)
+    {
+        $staff = $this->staff->whereHas("staffPasswordReminder", function ($query) use ($hash) {
+            $query->where('hash', '=', $hash);
+        })
+            ->first();
+
+        if (empty($staff)) {
+            Abort(404);
+        }
+
+        return $staff;
+    }
+
+    public function updateremindPassword($staff_id, $password)
+    {
+        $staff = $this->staff->find($staff_id);
+        $staff->update(['password' => $password, 'staff_pwd_reset_flag' => false]);
+
+        return $staff;
+    }
+
+    public function setUsed($staff_id, $hash)
+    {
+        $staff_password_reminder = $this->staff_password_reminder->where('staff_id', $staff_id)
+                                        ->where('hash', $hash)->first();
+        $staff_password_reminder->update(['is_used' => true, 'reset_at' => Carbon::now()]);
+
+        return $staff_password_reminder;
     }
 }

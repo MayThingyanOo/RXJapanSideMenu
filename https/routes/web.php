@@ -26,6 +26,8 @@ Route::prefix('user')->group(function () {
             Route::post('', 'actionSendPasswordReminderMail')->name('action_send_reminder_mail');
             Route::get('/finish', 'showFinish')->name('get_finish');
             Route::get('/reminder', 'showPasswordReminderForm')->name('get_reminder_password');
+            Route::post('/reminder', 'actionRemindPassword')->name('action_remind_password');
+            Route::get('/reminder/complete', 'showCompletePasswordReminder')->name('get_complete_pw_reminder');
         });
     });
 });

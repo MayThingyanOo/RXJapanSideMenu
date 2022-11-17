@@ -44,4 +44,9 @@ class Staff extends CPSUserAuthenticatable
     {
         return $this->hasOne('App\Models\User', 'user_id', 'user_id');
     }
+
+    public function staffPasswordReminder()
+    {
+        return $this->hasmany('App\Models\StaffPasswordReminder', 'staff_id', 'staff_id');
+    }
 }
