@@ -48,17 +48,12 @@
         <div class="navbar-fixed-top">
             <!--HEADER-->
             <header class="navbar qb-navbar qb-bg"
-                @if (CpsAuth::user()->user->banner_color == '#00a6ff') style="background-color: #ffffff" @else style="background-color: {{ CpsAuth::user()->user->banner_color }}" @endif>
+                style="background-color: #ffffff">
                 <div class="navbar-header"
-                    @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
-                    <a class="navbar-brand qb-navbar-brand withoutripple {{ CpsAuth::user()->user->logo ? 'has-logo' : '' }}"
+                    style="background-color: #00A6FF">
+                    <a class="navbar-brand qb-navbar-brand withoutripple"
                         href="{{ route('get_exhibition_list', ['tab' => $h_exhibition->exhibition_group_id ?? \Route::input('exhibition_group_id')]) }}">
-                        @if (CpsAuth::user()->user->logo)
-                            <img id="cps_logo"
-                                src={{ CpsFile::tmpUrl(['logo/' . CpsAuth::user()->user->id, CpsAuth::user()->user->logo], '+2 days') }}>
-                        @else
-                            <img src="/img/Q_Business_type.png">
-                        @endif
+                        <p style="font-size:24px;color:#fff;">RXJAPAN</p>
                     </a>
                 </div>
                 <div class="qb-navbar-new">
@@ -66,7 +61,7 @@
                         <li class="dropdown">
                             <a class="qb-dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button"
                                 data-bs-toggle="dropdown" href="#">
-                                <span class="fl pt05 pr05">{{ CpsAuth::user()->name }} さん</span>&nbsp;
+                                <span class="fl pt05 pr05">May さん</span>&nbsp;
                                 <span class="user-btn"></span>
                             </a>
                             <ul class="dropdown-menu qb-dropdown-menu">
@@ -79,7 +74,7 @@
                             </ul>
                         </li>
                         <li class="guide">
-                            <a href="{{ guide_url('menu') }}" target="_blank">
+                            <a href="" target="_blank">
                                 <span class="icon-guide qb-tooltip-link" data-placement="bottom" title="使い方ガイド"></span>
                             </a>
                         </li>

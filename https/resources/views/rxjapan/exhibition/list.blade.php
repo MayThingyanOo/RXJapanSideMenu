@@ -10,25 +10,21 @@
         </nav>
         @if ($exhibition_groups->isEmpty())
             <div class="qb-exhibition-list-empty">
-                @if (CpsAuth::isSuperUser())
-                    右上の「イベント新規作成」からイベントを作成してください。
-                @else
-                    現在ログインされているユーザではイベント作成権限がありません。イベント作成権限があるユーザにてログインをしてください。
-                @endif
+                インされているユーザではイベント作成権限がありません。イベント作成権限があるユーザにてログインをしてください。
             </div>
         @else
             @foreach ($exhibition_groups as $key => $exhibition_group)
                 <div class="qb-exhibition-list-wrapper">
                     <table
                         class="qb-exhibition-list {{ $exhibition_group->id == ($open ?: $exhibition_groups->pluck('id')->first()) ? 'qb-open' : '' }}"
-                        @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
+                        style="background-color: #00A6FF">
                         <thead class="header">
                             <tr class="qb-exhibition-list-header">
                                 @php($ids = $exhibition_group->exhibitions->pluck('id')->all())
                                 @php($before = 0)
                                 @php($insession = 0)
                                 @php($after = 0)
-                                <th class="corner corner-left group-name pl15 pr15" @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
+                                <th class="corner corner-left group-name pl15 pr15" style="background-color: #00A6FF">
                                     <p>{{ $exhibition_group->group_name }}</p>
                                     @foreach ($exhibition_group->exhibitions->sortBy('exhibition_id') as $key => $exhibition)
                                         @if ($exhibition->status_code == 1) @php( $before += 1 ) @endif
@@ -41,49 +37,7 @@
                                         <li>終了 <span>{{ isset($after) ? $after : 0 }}</span>件</li>
                                     </ul>
                                 </th>
-                                {{-- <th>@if (!CpsAuth::isSuperUser())<span class="tag">{{CpsAuth::getRightNameInExhibitionGroup($exhibition_group)}}</span>@else &nbsp; @endif</th> --}}
-                                <th @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif><span class="fz-xlg_ttl">総申込数</span> <span
-                                        class="fz-xlg">{{ $visitors_count->only($ids)->sum() }}</span> 人</th>
-                                <th @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif><span class="fz-xlg_ttl">総来場数</span> <span
-                                        class="fz-xlg">{{ $entries_count->only($ids)->sum() }}</span> 人</th>
-                                @if (CpsAuth::isSuperUser())
-                                    <th class="qb-js-event-off" @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
-                                        <div class="dropdown">
-                                            <button type="button" class="border qb-btn dropdown-btn" aria-expanded="false"
-                                                aria-haspopup="true" role="button" data-bs-toggle="dropdown"
-                                                @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>イベント編集</button>
-                                            <ul class="dropdown-menu qb-exhibition-dropdown-menu event-edit">
-                                                <li class="_link"
-                                                    data-url="{{ route('qb_staff_list', ['exhibition_group_id' => $exhibition_group->exhibition_group_id]) }}">
-                                                    スタッフ管理</li>
-                                                @if ($exhibition_group->isAuthorityDivisionFunctionEnabled())
-                                                    <li class="_link"
-                                                        data-url="{{ route('qb_orgs_detail', ['exhibition_group_id' => $exhibition_group->id]) }}">
-                                                        組織設定</li>
-                                                @endif
-                                                @if (CpsAuth::isSuperUser())
-                                                    <li class="_exhibition_group_edit"
-                                                        data-url="{{ route('qb_ex_gp_edit', [$exhibition_group->exhibition_group_id]) }}"
-                                                        data-id="{{ $exhibition_group->id }}"
-                                                        data-name="{{ $exhibition_group->group_name }}">イベントタイトル変更</li>
-                                                    <li class="_exhibition_group_function"
-                                                        data-url="{{ route('qb_ex_gp_edit', [$exhibition_group->exhibition_group_id]) }}"
-                                                        data-id="{{ $exhibition_group->id }}"
-                                                        data-name="{{ $exhibition_group->group_name }}">オプション機能確認</li>
-                                                    <li class="_link ex_group_copy"
-                                                        data-url="{{ route('qb_ex_gp_copy', ['exhibition_group_id' => $exhibition_group->exhibition_group_id]) }}">
-                                                        このイベントの複製</li>
-                                                    <li data-type="exhibition_group" data-title="イベントの削除"
-                                                        class="_can_delete {{ $insession >= 1 ? 'open_alert' : ''  }}"
-                                                        data-name="{{ $exhibition_group->group_name }}"
-                                                        data-url="{{ route('qb_ex_gp_delete', [$exhibition_group->exhibition_group_id]) }}">
-                                                        このイベントの削除</li>
-                                                @endif
-                                            </ul>
-                                        </div>
-                                    </th>
-                                @endif
-                                <th @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
+                                <th style="background-color: #00A6FF">
                                     <a href="#" class="qb-exhibition-list-open-btn"><span class="arrow"></span></a>
                                 </th>
                             </tr>
@@ -100,17 +54,13 @@
                                                     <th>No.</th>
                                                     <th>セッション名/開催場所</th>
                                                     <th>開催期間</th>
-                                                    <th>申込者数</th>
-                                                    <th>来場者数</th>
-                                                    @if (CpsAuth::isSuperUser())
-                                                        <th>&nbsp;</th>
-                                                    @endif
+                                                    <th>&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($exhibition_group->exhibitions->sortBy('exhibition_id') as $key => $exhibition)
                                                     <tr class="_link"
-                                                        data-url="{{ route('qb_exhibition_top', ['exhibition_id' => $exhibition->exhibition_id]) }}">
+                                                        data-url="">
                                                         <td class="qb-exhibition-list-id">
                                                             {{ $exhibition_group->order . '-' . sprintf('%02d', $exhibition->order) }}
                                                         </td>
@@ -140,82 +90,8 @@
                                                                 @endif
                                                             @endforeach
                                                         </td>
-                                                        <td class="text-right">
-                                                            <span
-                                                                class="fz-lg">{{ $visitors_count->get($exhibition->id) ?: 0 }}</span>
-                                                            人
-                                                        </td>
-                                                        <td class="text-right">
-                                                            <span
-                                                                class="fz-lg">{{ $entries_count->get($exhibition->id) ?: 0 }}</span>
-                                                            人
-                                                        </td>
-                                                        @if (CpsAuth::isSuperUser())
-                                                            <td class="text-center">
-                                                                <div>
-                                                                    <div class="dropdown qb-js-event-off">
-                                                                        <button type="button"
-                                                                            class="qb-btn dropdown-btn btn btn-primary-reverse"
-                                                                            aria-expanded="false" aria-haspopup="true"
-                                                                            role="button" data-bs-toggle="dropdown"
-                                                                            @if (CpsAuth::user()->user->banner_color) style="border-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="border-color: #00A6FF" @endif>編集</button>
-                                                                        <ul
-                                                                            class="dropdown-menu qb-exhibition-dropdown-menu qb-dropdown-menu-blue setting-edit" data-popper-placement="bottom">
-                                                                            <li class="_link"
-                                                                                data-url="{{ route('qb_copy_exhibition', ['exhibition_id' => $exhibition->exhibition_id]) }}">
-                                                                                このセッションの複製</li>
-                                                                            <span class="tool-tip"
-                                                                                data-bs-toggle="tooltip" data-placement="top"
-                                                                                title="">
-                                                                                @token
-                                                                                <li data-type="visitors"
-                                                                                    data-title="申込者の全件削除"
-                                                                                    class="_can_delete_visitor {{ $exhibition->isHolding() ? 'open_alert' : '' }}"
-                                                                                    data-name="{{ $exhibition->name }}"
-                                                                                    data-attr={{ $exhibition->exhibition_group_id }}
-                                                                                    data-url="{{ route('qb_action_delete_visitor_all', ['exhibition_id' => $exhibition->exhibition_id]) }}">
-                                                                                    このセッション申込者の全件削除</li>
-                                                                            </span>
-                                                                            <li data-type="exhibition" data-title="セッションの削除"
-                                                                                class="_can_delete {{ $exhibition->isHolding() ? 'open_alert' : '' }}"
-                                                                                data-name="{{ $exhibition->name }}"
-                                                                                data-url="{{ route('qb_action_delete_exhibition', ['exhibition_id' => $exhibition->exhibition_id]) }}">
-                                                                                このセッションの削除</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        @endif
                                                     </tr>
                                                 @endforeach
-
-                                                @if (CpsAuth::isSuperUser())
-                                                    <tr class="row-add-schedule">
-                                                        <th colspan="6">
-                                                            <div>
-                                                                @if ($exhibition_group->exhibitions->count() < 1)
-                                                                    セッションを右のボタンより追加してください。
-                                                                @endif
-                                                                <div class="button-add">
-                                                                    <a class="btn btn-primary btn-create btn-add"
-                                                                        href="{{ route('qb_ex_create_step1', ['exhibition_group_id' => $exhibition_group->exhibition_group_id]) }}"
-                                                                        @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important;box-shadow: none" @else style="background-color: #00A6FF" @endif>セッションの追加
-                                                                        <i class="material-icons">add</i></a>
-                                                                </div>
-                                                            </div>
-                                                        </th>
-                                                    </tr>
-                                                @else
-                                                    @if ($exhibition_group->exhibitions->count() < 1)
-                                                        <tr class="row-add-schedule">
-                                                            <th colspan="6">
-                                                                <div>
-                                                                    セッション追加の権限がありません。
-                                                                </div>
-                                                            </th>
-                                                        </tr>
-                                                    @endif
-                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

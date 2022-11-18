@@ -25,13 +25,13 @@ class CpsAuth
         return $this->guard->guest();
     }
 
-    public function user()
+    public static function user()
     {
-        if (empty($this->guard)) {
+        if (empty(static::$guard)) {
             return [];
         }
 
-        return $this->guard->user();
+        return static::$guard->user();
     }
 
     public static function id()
