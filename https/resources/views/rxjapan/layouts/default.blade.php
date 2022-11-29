@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="/img/favicon.ico" />
-    @section('title', 'aa')
     <title>@yield('title') | Q-Business</title>
 
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +24,7 @@
     @cssIf($__view->name)
 
     <script src="/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/bootstrap/plugin/dataTable/js/jquery.dataTables.min.js"></script>
     <script src="/bootstrap/plugin/dataTable/js/buttons.colVis.js"></script>
     <script src="/bootstrap/plugin/dataTable/js/dataTables.buttons.js"></script>
@@ -40,7 +39,6 @@
     <script src="{{ auto_version('/js/i18/ja.js') }}"></script>
     <script src="{{ auto_version('/js/lib.js') }}"></script>
     <script src="{{ auto_version('/js/main.js') }}"></script>
-    @stack('ahead_javascript')
 </head>
 
 <body class="{{ empty($in_exhibition) ? 'qb-bg-img' : 'qb-content-bg' }}">
@@ -48,12 +46,12 @@
         <div class="navbar-fixed-top">
             <!--HEADER-->
             <header class="navbar qb-navbar qb-bg"
-                style="background-color: #ffffff">
+                @if (CpsAuth::user()->user->banner_color == '#00a6ff') style="background-color: #ffffff" @else style="background-color: {{ CpsAuth::user()->user->banner_color }}" @endif>
                 <div class="navbar-header"
-                    style="background-color: #00A6FF">
+                    @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
                     <a class="navbar-brand qb-navbar-brand withoutripple"
                         href="{{ route('get_exhibition_list', ['tab' => $h_exhibition->exhibition_group_id ?? \Route::input('exhibition_group_id')]) }}">
-                        <p style="font-size:24px;color:#fff;">RXJAPAN</p>
+                        <p class="logo-title">RXJAPAN</p>
                     </a>
                 </div>
                 <div class="qb-navbar-new">
@@ -61,22 +59,17 @@
                         <li class="dropdown">
                             <a class="qb-dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button"
                                 data-bs-toggle="dropdown" href="#">
-                                <span class="fl pt05 pr05">May さん</span>&nbsp;
+                                <span class="fl pt05 pr05">{{ CpsAuth::user()->name }} さん</span>&nbsp;
                                 <span class="user-btn"></span>
                             </a>
                             <ul class="dropdown-menu qb-dropdown-menu">
                                 <li>
-                                    <a href=""> アカウント情報 </a>
+                                    <a href="{{ route('get_my_page_list') }}"> アカウント情報 </a>
                                 </li>
                                 <li>
-                                    <a href=""> ログアウト </a>
+                                    <a href="{{ route('get_logout') }}"> ログアウト </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="guide">
-                            <a href="" target="_blank">
-                                <span class="icon-guide qb-tooltip-link" data-placement="bottom" title="使い方ガイド"></span>
-                            </a>
                         </li>
                     </ul>
                     @yield('navbar')

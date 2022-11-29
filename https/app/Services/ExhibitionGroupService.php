@@ -13,7 +13,7 @@ class ExhibitionGroupService
     public function getListAccessibleWithExhibition($staff)
     {
         if ($staff->is_super_user_flag) {
-            return ExhibitionGroup::with('exhibitions.exhibition_dates')->where('user_id', $staff->user_id)->get();
+            return ExhibitionGroup::with('exhibitions.exhibitionDates')->where('user_id', $staff->user_id)->get();
         }
     }
 

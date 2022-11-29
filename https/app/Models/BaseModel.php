@@ -11,7 +11,7 @@ namespace App\Models;
 
 use App\Exceptions\NotPrimaryDeleteException;
 use App\Exceptions\NotPrimaryUpdateException;
-use App\Lib\CpsAuth\CpsAuth;
+use CpsAuth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 

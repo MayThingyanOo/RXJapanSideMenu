@@ -2,20 +2,24 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
+use CpsAuth;
 
-class Authenticate extends Middleware
+class Authenticate
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
-     */
-    protected function redirectTo($request)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        $auth = CpsAuth::setGuard($guard);
+        if ($auth->isGuest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                $map = [
+                    'user_staff' => ['get_login', ['redirect' => url()->current()]],
+                ];
+                return redirect()->guest(route($map[$guard][0], $map[$guard][1]));
+            }
         }
+        return $next($request);
     }
 }

@@ -30,8 +30,22 @@ Route::prefix('user')->group(function () {
             Route::get('/reminder/complete', 'showCompletePasswordReminder')->name('get_complete_pw_reminder');
         });
     });
-});
 
-Route::controller(ExhibitionController::class)->group(function () {
-    Route::get('/user/exhibition', 'showList')->name('get_exhibition_list', 'イベント一覧');
+    Route::group(['middleware' => 'auth:user_staff'], function () {
+        Route::controller(LoginController::class)->group(function () {
+            Route::get('/logout', 'logout')->name('get_logout');
+        });
+        Route::controller(ExhibitionController::class)->group(function () {
+            Route::get('/exhibition', 'showList')->name('get_exhibition_list', 'イベント一覧');
+        });
+        Route::controller(MypageController::class)->group(function () {
+            Route::prefix('mypage')->group(function () {
+                Route::get('', 'showList')->name('get_my_page_list', '');
+                Route::get('/edit', 'showEdit')->name('get_my_page_edit');
+                Route::post('/update', 'actionUpdate')->name('action_update_my_page');
+                Route::get('/password/edit', 'showEditPassword')->name('get_edit_password_form');
+                Route::post('/password/update', 'actionUpdatePassword')->name('action_update_password');
+            });
+        });
+    });
 });

@@ -45,13 +45,94 @@ class Exhibition extends BaseModel
     private $date_list;
     private $status_name = [1 => "開催前", 2 => "開催中", 3 => "終了"];
 
-    public function exhibition_dates()
+    public function exhibitionDates()
     {
         return $this->hasMany('App\Models\ExhibitionDate')->orderBy('day');
     }
 
-    public function exhibition_group()
+    public function exhibitionGroup()
     {
         return $this->belongsTo('App\Models\ExhibitionGroup', 'exhibition_group_id', 'exhibition_group_id');
+    }
+
+    public function getStatusNameAttribute()
+    {
+        return $this->status_name[$this->status_code];
+    }
+
+    public function getOpenDateTimeAttribute()
+    {
+        $first = $this->exhibitionDates->sortBy('day')
+            ->first();
+
+        return $first->day . " " . $first->open_time;
+    }
+
+    public function getEndDateTimeAttribute()
+    {
+        $first = $this->exhibitionDates->sortByDesc('day')
+            ->first();
+
+        return $first->day . " " . $first->end_time;
+    }
+
+    public function getStatusCodeAttribute()
+    {
+        if ($this->isBefore()) {
+            return 1;
+        } elseif ($this->isHolding()) {
+            return 2;
+        } elseif ($this->isAfter()) {
+            return 3;
+        }
+
+        return 99;
+    }
+
+    /**
+     * 開催前か
+     *
+     * @return bool
+     */
+    public function isBefore()
+    {
+        $t = time();
+        if ($t < strtotime($this->open_datetime)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 現在開催中か
+     *
+     * @return bool
+     */
+    public function isHolding()
+    {
+        $t = time();
+
+        if (strtotime($this->open_datetime) <= $t && $t <= strtotime($this->end_datetime)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 開催後か
+     *
+     * @return bool
+     */
+    public function isAfter()
+    {
+        $t = time();
+
+        if (strtotime($this->end_datetime) < $t) {
+            return true;
+        }
+
+        return false;
     }
 }

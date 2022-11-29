@@ -8,7 +8,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Lib\CpsAuth\CpsAuth;
 
 /**
  * Description of Builder
@@ -20,7 +19,7 @@ class Builder extends \Illuminate\Database\Eloquent\Builder
 
     public function update(array $values)
     {
-        return parent::update(\Illuminate\Support\Arr::add($values, "updated_by", CpsAuth::id()));
+        return parent::update(\Illuminate\Support\Arr::add($values, "updated_by", \CpsAuth::id()));
     }
 
     public function delete()

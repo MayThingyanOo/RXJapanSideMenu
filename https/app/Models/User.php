@@ -12,6 +12,9 @@ class User extends BaseModel
      *
      * @var array
      */
+    protected $connection = 'qpass';
+    protected $table = 'users';
+
     protected $fillable = [
         'company',
         'department',
@@ -30,6 +33,14 @@ class User extends BaseModel
         'sso_flag',
         'sso_info',
     ];
+
+
+    protected static $login_statuses = [1 => "ログイン情報送信前", 2 => "ログイン可能", 3 => "無効"];
+
+    public function isLogginable()
+    {
+        return $this->status != 3;
+    }
 
     public function setPasswordAttribute($value)
     {

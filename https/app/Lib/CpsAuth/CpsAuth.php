@@ -14,10 +14,11 @@ class CpsAuth
      * @param $guard
      * @return $this
      */
-    public static function setGuard($guard)
+    public function setGuard($guard)
     {
-        $guard = Auth::guard($guard);
-        return $guard;
+        $this->guard = Auth::guard($guard);
+
+        return $this;
     }
 
     public function isGuest()
@@ -25,23 +26,23 @@ class CpsAuth
         return $this->guard->guest();
     }
 
-    public static function user()
+    public function user()
     {
-        if (empty(static::$guard)) {
+        if (empty($this->guard)) {
             return [];
         }
 
-        return static::$guard->user();
+        return $this->guard->user();
     }
 
-    public static function id()
+    public function id()
     {
         // @todo
-        if (empty(static::$guard)) {
+        if (empty($this->guard)) {
             return 999999;
         }
 
-        return static::$guard->id();
+        return $this->guard->id();
     }
 
     public function logout()

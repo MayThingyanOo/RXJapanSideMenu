@@ -1,0 +1,46 @@
+.qb-container {
+  width: 600px;
+  margin: 0 auto 30px;
+}
+
+.btn-edit-password {
+  margin: 0;
+}
+
+.qb-form-table tbody tr td.box-10 {
+  width: 6% !important;
+  padding: 10px;
+  background-color: #eff2f7;
+}
+
+.box-20 {
+  padding: 10px !important;
+}
+
+.qb-content-bg {
+  padding-left: 0;
+}
+
+.btn-double-group {
+  float: right;
+  margin-top: 30px;
+}
+
+.btn-double-group .btn.btn-cancel {
+  width: 120px;
+  padding: 9px;
+  background: #939caa;
+}
+
+.btn-double-group .btn.btn-confirm {
+  width: 120px;
+  padding: 9px;
+}
+
+.qb-sub-page-header {
+  margin: 30px 0 15px;
+}
+
+.qb-form-table {
+  margin: 0;
+}

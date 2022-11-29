@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ExhibitionGroupService;
-use App\Lib\CpsAuth\CpsAuth;
+use CpsAuth;
 use Illuminate\Support\Arr;
 use Route;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +24,8 @@ class ExhibitionController extends Controller
      */
     public function showList()
     {
-        $staff = Auth::guard('user_staff')->user();
-        $exhibition_groups = $this->exhibition_group_service->getListAccessibleWithExhibition($staff)
-                                  ->sortByDesc("exhibition_group_id");
+        $exhibition_groups = $this->exhibition_group_service->getListAccessibleWithExhibition(CpsAuth::user())
+                                    ->sortByDesc("exhibition_group_id");
         $exhibitions = $exhibition_groups->pluck('exhibitions')->collapse();
 
         $vRequest = \Request::create(\URL::previous());
