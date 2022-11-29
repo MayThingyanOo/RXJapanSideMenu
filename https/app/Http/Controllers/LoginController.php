@@ -9,22 +9,26 @@ use App\Services\LoginService;
 use CpsAuth;
 use CpsMail;
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
     private $loginService;
 
-    public function __construct(LoginService $loginService) {
+    public function __construct(LoginService $loginService)
+    {
         $this->loginService = $loginService;
     }
 
-    public function showLogin() {
-        // if (!\CpsAuth::setGuard("user_staff")->isGuest()) {
-        //     return redirect(route('get_exhibition_list'));
-        // }
+    public function showLogin()
+    {
+        if (!CpsAuth::setGuard("user_staff")->isGuest()) {
+            return redirect(route('get_exhibition_list'));
+        }
 
         return view('rxjapan.auth.login');
     }
 
-    public function actionLogin(LoginRequest $request) {
+    public function actionLogin(LoginRequest $request)
+    {
         $email = $request->email;
         $password = $request->password;
 
@@ -48,11 +52,13 @@ class LoginController extends Controller {
         return redirect(route('get_exhibition_list'));
     }
 
-    public function showReminderMailForm() {
+    public function showReminderMailForm()
+    {
         return view('rxjapan.auth.password');
     }
 
-    public function actionSendPasswordReminderMail(SendPasswordReminderMailRequest $request) {
+    public function actionSendPasswordReminderMail(SendPasswordReminderMailRequest $request)
+    {
         $email = $request->email;
         if (str_contains($email, "'")) {
             return redirect(route('get_show_password'))
@@ -71,17 +77,20 @@ class LoginController extends Controller {
         return redirect(route('get_finish'));
     }
 
-    public function showFinish() {
+    public function showFinish()
+    {
         return view('rxjapan.auth.finish');
     }
 
-    public function showPasswordReminderForm(PasswordReminderRequest $request) {
+    public function showPasswordReminderForm(PasswordReminderRequest $request)
+    {
         $hash = $request->get('h');
 
         return view('rxjapan.auth.reminder')->with('hash', $hash);
     }
 
-    public function actionRemindPassword(PasswordReminderRequest $request) {
+    public function actionRemindPassword(PasswordReminderRequest $request)
+    {
         $hash = $request->hash;
         $password = $request->password;
 
@@ -90,7 +99,8 @@ class LoginController extends Controller {
         return redirect(route('get_complete_pw_reminder'));
     }
 
-    public function showCompletePasswordReminder() {
+    public function showCompletePasswordReminder()
+    {
         return view('rxjapan.auth.complete');
     }
 

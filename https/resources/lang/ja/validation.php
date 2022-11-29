@@ -1,4 +1,4 @@
-<?php // resources/lang/ja/validation.php
+<?php
 
 return [
 

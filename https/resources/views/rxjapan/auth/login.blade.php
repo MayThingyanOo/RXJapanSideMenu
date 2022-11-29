@@ -6,27 +6,13 @@
 @endsection
 
 @section('content')
-    <div
-        class="qb-login-box {{ $errors->has('login_fail_limit') || $errors->has('email') || $errors->has('password') ? '' : 'animation' }}">
+    <div class="qb-login-box {{ $errors->has('email') || $errors->has('password') ? '' : 'animation' }}">
         <div class="qb-login-header">
             <h1 class="login-title">RX JAPAN</h1>
             <p class="login-txt">ログイン</p>
             <p class="font-normal">登録したメールアドレスとパスワードを入力してください。</p>
         </div>
         <div class="login-box-body qb-login-box-body">
-            @if ($errors->has('login_fail_limit'))
-                <div class="alert alert-danger mb30" id="click_hide">
-                    パスワード間違いが規定回数を超えたため、セキュリティロックをしました。
-                    しばらく時間をおいてから再度ログインしてください。
-                </div>
-            @endif
-
-            @if ($errors->has('ip_address_limit'))
-                <div class="alert alert-danger mb30" id="click_hide">
-                    このアカウントはアクセスできるIPアドレスが制限されています。
-                </div>
-            @endif
-
             @if ($errors->has('email') || $errors->has('password'))
                 <div class="alert alert-danger mb30" id="click_hide">
                     メールアドレス・パスワードを確認してください。
@@ -43,8 +29,8 @@
                     <div class="box-90 login-screen">
                         <div class="form-group label-floating {{ old('email') ? 'has-error' : '' }} pb00 mt00">
                             <label class="control-label">メールアドレス</label>
-                            <input type="email" class="form-control pl00 login-email" name="email" value="{{ old('email') }}"
-                                id="testest">
+                            <input type="email" class="form-control pl00 login-email" name="email"
+                                value="{{ old('email') }}" id="testest">
                             <span class="material-input"></span>
                         </div>
                     </div>
