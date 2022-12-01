@@ -2,99 +2,50 @@
 
 namespace App\Services;
 
-use App\Models\Staff;
-use App\Models\StaffPasswordReminder;
-use Carbon\Carbon;
+use App\Repositories\LoginRepository;
+use DB;
 
 class LoginService
 {
-    private $staff;
-    private $staff_password_reminder;
+    private $login_repository;
 
-    public function __construct(Staff $staff, StaffPasswordReminder $staff_password_reminder)
+    public function __construct(LoginRepository $login_repository)
     {
-        $this->staff = $staff;
-        $this->staff_password_reminder = $staff_password_reminder;
+        $this->login_repository = $login_repository;
     }
 
     public function getStaff($email)
     {
-        return $this->staff->where('email', $email)->where('is_super_user_flag', true);
+        return $this->login_repository->getStaff($email)->first();
     }
 
     public function createPasswordReminderHashByEmail($email)
     {
         $hash = sha1(uniqid(mt_rand(), true));
-        $staff = $this->getByEmail($email);
+        $staff = $this->login_repository->getStaff($email)->first();
 
-        return $this->create($staff->staff_id, $hash);
-    }
-
-    public function getByEmail($email)
-    {
-        $staff = $this->staff->where('email', $email)->first();
-
-        if (empty($staff)) {
-            Abort(404);
-        }
-
-        return $staff;
-    }
-
-    public function create($staff_id, $hash)
-    {
-        $check_hash = $this->staff_password_reminder->pluck('hash')->toArray();
-
-        while (in_array($hash, $check_hash)) {
-            $hash = sha1(uniqid(mt_rand(), true));
-        }
-
-        return $this->staff_password_reminder->create([
-            'staff_id' => $staff_id, 'hash' => $hash,
-            'created_by' => $staff_id
-        ]);
+        return $this->login_repository->create($staff->staff_id, $hash);
     }
 
     public function remindPassword($hash, $password)
     {
-        $staff = $this->getByHashInStaffPasswordReminder($hash);
-
-        \DB::transaction(function () use ($hash, $password, $staff) {
-
-            $staff = $this->updateremindPassword($staff->staff_id, $password);
-
-            $this->setUsed($staff->staff_id, $hash);
-        });
-    }
-
-    public function getByHashInStaffPasswordReminder($hash)
-    {
-        $staff = $this->staff->whereHas("staffPasswordReminder", function ($query) use ($hash) {
-            $query->where('hash', '=', $hash);
-        })
-            ->first();
+        $staff = $this->login_repository->getByHashInStaffPasswordReminder($hash)->first();
 
         if (empty($staff)) {
             Abort(404);
         }
 
-        return $staff;
+        DB::transaction(function () use ($hash, $password, $staff) {
+            $staff_id = $staff->staff_id;
+
+            $staff = $this->login_repository->remindPassword($staff_id, $password);
+
+            $this->login_repository->setUsed($staff_id, $hash);
+        });
     }
 
-    public function updateremindPassword($staff_id, $password)
+    public function changePassword($password, $staff_id)
     {
-        $staff = $this->staff->find($staff_id);
-        $staff->update(['password' => $password, 'staff_pwd_reset_flag' => false]);
-
-        return $staff;
-    }
-
-    public function setUsed($staff_id, $hash)
-    {
-        $staff_password_reminder = $this->staff_password_reminder->where('staff_id', $staff_id)
-                                        ->where('hash', $hash)->first();
-        $staff_password_reminder->update(['is_used' => true, 'reset_at' => Carbon::now()]);
-
-        return $staff_password_reminder;
+        $staff = $this->login_repository->changePassword($password, $staff_id);
     }
 }

@@ -25,7 +25,7 @@ class CpsMailProvider extends ServiceProvider
     {
 
         $this->app->singleton('cpsmailfacade', function () {
-            return new CpsMail;
+            return new CpsMail();
         });
 
         $this->app->booting(function () {

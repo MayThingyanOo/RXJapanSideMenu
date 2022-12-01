@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="/img/favicon.ico" />
-    <title>@yield('title') | Q-Business</title>
+    <title>@yield('title') | Rx-Japan</title>
 
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bootstrap/css/custom_bootstrap.css" rel="stylesheet"> {{-- Overriding Bootstrap CSS --}}
@@ -46,9 +46,9 @@
         <div class="navbar-fixed-top">
             <!--HEADER-->
             <header class="navbar qb-navbar qb-bg"
-                @if (CpsAuth::user()->user->banner_color == '#00a6ff') style="background-color: #ffffff" @else style="background-color: {{ CpsAuth::user()->user->banner_color }}" @endif>
+                @if (CpsAuth::bannerColor() == '#00a6ff') style="background-color: #ffffff" @else style="background-color: {{ CpsAuth::bannerColor() }}" @endif>
                 <div class="navbar-header"
-                    @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }} !important" @else style="background-color: #00A6FF" @endif>
+                    @if (CpsAuth::bannerColor()) style="background-color: {{ CpsAuth::bannerColor() }} !important" @else style="background-color: #00A6FF" @endif>
                     <a class="navbar-brand qb-navbar-brand withoutripple"
                         href="{{ route('get_exhibition_list', ['tab' => $h_exhibition->exhibition_group_id ?? \Route::input('exhibition_group_id')]) }}">
                         <p class="logo-title">RXJAPAN</p>
@@ -64,7 +64,7 @@
                             </a>
                             <ul class="dropdown-menu qb-dropdown-menu">
                                 <li>
-                                    <a href="{{ route('get_my_page_list') }}"> アカウント情報 </a>
+                                    <a href="{{ route('get_user_profile') }}"> アカウント情報 </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('get_logout') }}"> ログアウト </a>
@@ -84,7 +84,6 @@
                 </div>
             @endif
         </div>
-        <!-- Full Width Column -->
         <!-- Main content -->
         <section class="content @hasSection('header') inExhibition @endif">
             @yield('content')

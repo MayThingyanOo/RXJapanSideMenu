@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Exhibition;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
@@ -68,9 +67,5 @@ class AppServiceProvider extends ServiceProvider
             \View::share('__view', (object) ['name' => $view->getname()]);
             $view->with('__self', (object) ['name' => $view->getname()]);
         });
-
-        // Relation::morphMap([
-        //     'exhibition' => Exhibition::class,
-        // ]);
     }
 }

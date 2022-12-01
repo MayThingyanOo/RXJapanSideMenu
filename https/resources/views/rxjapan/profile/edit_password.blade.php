@@ -1,4 +1,4 @@
-@extends('rxjapan.layouts.default',['in_exhibition' => true])
+@extends('rxjapan.layouts.default')
 @section('title', 'パスワードの変更')
 @section('content')
 
@@ -11,7 +11,7 @@
         {{ csrf_field() }}
         <div class="btn-form-group">
             <div class="btn-double-group">
-                <a href="{{ route('get_my_page_list') }}" class="btn btn-default btn-cancel">キャンセル</a>
+                <a href="{{ route('get_user_profile') }}" class="btn btn-default btn-cancel">キャンセル</a>
                 <button type="submit" class="btn btn-primary btn-confirm">保存</button>
             </div>
         </div>
@@ -41,7 +41,7 @@
                     <td class="box-20">
                         <input type="password" class="form-control" name="password" id="form1">
                         @if ($errors->has('password'))
-                            {!! CpsForm::printErrorMessage($errors->first('password')) !!}
+                            {!! printErrorMessage($errors->first('password')) !!}
                         @endif
                     </td>
                 </tr>

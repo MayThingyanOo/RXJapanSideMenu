@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Staff;
 
-class StaffMypagePasswordRequest extends FormRequest
+class ProfilePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

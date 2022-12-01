@@ -14,7 +14,6 @@ class ExhibitionDate extends BaseModel
      * @var array
      */
     protected $fillable = ['exhibition_id', 'day', 'open_time', 'end_time'];
-    protected $appends = ['open_hour', 'open_minute', 'end_hour', 'end_minute'];
 
     public function getDayAttribute($value)
     {

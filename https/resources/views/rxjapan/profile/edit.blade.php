@@ -1,4 +1,4 @@
-@extends('rxjapan.layouts.default',['in_exhibition' => true])
+@extends('rxjapan.layouts.default')
 @section('title', 'アカウント情報の編集')
 @section('content')
 
@@ -6,11 +6,11 @@
         <h1 class="qb-align-center">アカウント情報の編集</h1>
     </div>
 
-    <form method="post" action="{{ route('action_update_my_page') }}" class="form-horizontal">
+    <form method="post" action="{{ route('action_profile_update') }}" class="form-horizontal">
         {{ csrf_field() }}
         <div class="btn-form-group">
             <div class="btn-double-group">
-                <a href="{{ route('get_my_page_list') }}" class="btn btn-default btn-cancel">キャンセル</a>
+                <a href="{{ route('get_user_profile') }}" class="btn btn-default btn-cancel">キャンセル</a>
                 <button type="submit" class="btn btn-primary btn-confirm">保存</button>
             </div>
         </div>
@@ -25,7 +25,7 @@
                         <input type="text" class="form-control" name="name" id="form1"
                             value="{{ old('name', $staff->name) }}">
                         @if ($errors->has('name'))
-                            {!! CpsForm::printErrorMessage($errors->first('name')) !!}
+                            {!! printErrorMessage($errors->first('name')) !!}
                         @endif
                     </td>
                 </tr>
@@ -37,13 +37,11 @@
                         <input type="text" class="form-control" id="form2" value="{{ old('email', $staff->email) }}"
                             readonly>
                         @if ($errors->has('email'))
-                            {!! CpsForm::printErrorMessage($errors->first('email')) !!}
+                            {!! printErrorMessage($errors->first('email')) !!}
                         @endif
                     </td>
                 </tr>
             </table>
         </div>
     </form>
-
-
 @endsection

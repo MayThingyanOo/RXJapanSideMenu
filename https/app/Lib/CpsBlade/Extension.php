@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,7 +17,6 @@ use Blade;
  */
 class Extension
 {
-
     public static function extendBlade()
     {
         static::registerDebugDirectives();
@@ -34,7 +34,7 @@ class Extension
             return "<?php echo method_field($expression); ?>";
         });
         Blade::directive('errorIf', function ($expression) {
-            return "<?php if(\$errors->has($expression)){ echo CpsForm::printErrorMessage(\$errors->first($expression)); } ?>";
+            return "<?php if(\$errors->has($expression)){ echo printErrorMessage(\$errors->first($expression)); } ?>";
         });
         Blade::directive('tooltip', function ($expression) {
             return '<div class="qb-tooltip-container">
@@ -43,10 +43,6 @@ class Extension
                         </div>
                     </div>';
         });
-        Blade::directive('customizeIf', function ($expression) {
-            return "<?php echo App\Lib\CpsBlade\Directive::readCustomFileIf($expression); ?>";
-        });
-
         Blade::directive('scope', function ($expression) {
             return "<?php echo csp_scope($expression); ?>";
         });
@@ -61,13 +57,6 @@ class Extension
         });
         Blade::directive('cssIf', function ($expression) {
             return "<?php echo App\Lib\CpsBlade\Directive::cssIf($expression); ?>";
-        });
-
-        Blade::directive('dataTable', function ($expression) {
-            if ($expression) {
-                return "<?php echo App\Lib\CpsBlade\Directive::dataTable(\$dataTable ?? null,$expression); ?>";
-            }
-            return "<?php echo App\Lib\CpsBlade\Directive::dataTable(\$dataTable); ?>";
         });
     }
 
@@ -101,5 +90,4 @@ class Extension
             }
         });
     }
-
 }

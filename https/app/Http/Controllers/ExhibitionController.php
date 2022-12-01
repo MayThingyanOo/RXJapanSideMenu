@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\ExhibitionGroupService;
 use CpsAuth;
-use Illuminate\Support\Arr;
-use Route;
-use Illuminate\Support\Facades\Auth;
 
 class ExhibitionController extends Controller
 {
@@ -25,18 +22,13 @@ class ExhibitionController extends Controller
     public function showList()
     {
         $exhibition_groups = $this->exhibition_group_service->getListAccessibleWithExhibition(CpsAuth::user())
-                                    ->sortByDesc("exhibition_group_id");
-        $exhibitions = $exhibition_groups->pluck('exhibitions')->collapse();
+            ->sortByDesc("exhibition_group_id");
 
-        $vRequest = \Request::create(\URL::previous());
-        $preRoute = Arr::first(Route::getRoutes(), lambda(compact('vRequest'), '$r=>$r->matches($vRequest)')) ?: Route::current();
-        $preRoute->bind($vRequest);
-        if ($preRoute->hasParameter('exhibition_id')) {
-            $open = $exhibitions->pluck('exhibition_group_id', 'id')->get($preRoute->parameter('exhibition_id'));
-        } else {
-            $open = $preRoute->parameter('exhibition_group_id', request('tab'));
-        }
+        $banner_color = CpsAuth::bannerColor();
+        $exhibition_group_id = $exhibition_groups->pluck('id')->first();
 
-        return view('rxjapan.exhibition.list', compact(['exhibition_groups', 'open']));
+        return view('rxjapan.exhibition.list', compact([
+            'exhibition_groups', 'banner_color', 'exhibition_group_id',
+        ]));
     }
 }

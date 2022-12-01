@@ -11,7 +11,10 @@
             <h1 class="login-title">RX JAPAN</h1>
             <p class="login-txt">パスワード再設定メール送信完了​</p>
             <p class="font-normal text-center mb00">
-                ご入力いただいたメールアドレス宛に<br>パスワード再設定用のURLを送信しました。<br>メールに記載された手順に従ってパスワードを<br>再設定してください。
+                ご入力いただいたメールアドレス宛に<br>
+                パスワード再設定用のURLを送信しました。<br>
+                メールに記載された手順に従ってパスワードを<br>
+                再設定してください。
             </p>
         </div>
         <div class="text-center">

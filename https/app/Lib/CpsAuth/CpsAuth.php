@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 class CpsAuth
 {
     private $guard;
-    private $is_admin = false;
-
     /**
      * @param $guard
      * @return $this
@@ -55,18 +53,8 @@ class CpsAuth
         return $this->guard->attempt($credentials);
     }
 
-    public function isAdmin()
+    public function bannerColor()
     {
-        return $this->is_admin;
-    }
-
-    public function isSuperUser()
-    {
-        return $this->user()->is_super_user_flag;
-    }
-
-    public function loginUsingId($id)
-    {
-        return $this->guard->loginUsingId($id);
+        return $this->user()->user->banner_color;
     }
 }

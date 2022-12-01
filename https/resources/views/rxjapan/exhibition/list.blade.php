@@ -14,21 +14,27 @@
         @else
             @foreach ($exhibition_groups as $key => $exhibition_group)
                 <div class="qb-exhibition-list-wrapper">
-                    <table
-                        class="qb-exhibition-list {{ $exhibition_group->id == ($open ?: $exhibition_groups->pluck('id')->first()) ? 'qb-open' : '' }}"
-                        @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }}" @else style="background-color: #00A6FF" @endif>
+                    <table class="qb-exhibition-list {{ $exhibition_group->id == $exhibition_group_id ? 'qb-open' : '' }}"
+                        @if ($banner_color) style="background-color: {{ $banner_color }}" @else style="background-color: #00A6FF" @endif>
                         <thead class="header">
                             <tr class="qb-exhibition-list-header">
                                 @php($ids = $exhibition_group->exhibitions->pluck('id')->all())
                                 @php($before = 0)
                                 @php($insession = 0)
                                 @php($after = 0)
-                                <th class="corner corner-left group-name pl15 pr15" @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }}" @else style="background-color: #00A6FF" @endif>
+                                <th class="corner corner-left group-name pl15 pr15"
+                                    @if ($banner_color) style="background-color: {{ $banner_color }}" @else style="background-color: #00A6FF" @endif>
                                     <p>{{ $exhibition_group->group_name }}</p>
                                     @foreach ($exhibition_group->exhibitions->sortBy('exhibition_id') as $key => $exhibition)
-                                        @if ($exhibition->status_code == 1) @php( $before += 1 ) @endif
-                                        @if ($exhibition->status_code == 2) @php( $insession += 1 ) @endif
-                                        @if ($exhibition->status_code == 3) @php( $after += 1 ) @endif
+                                        @if ($exhibition->status_code == 1)
+                                            @php($before += 1)
+                                        @endif
+                                        @if ($exhibition->status_code == 2)
+                                            @php($insession += 1)
+                                        @endif
+                                        @if ($exhibition->status_code == 3)
+                                            @php($after += 1)
+                                        @endif
                                     @endforeach
                                     <ul class="flex">
                                         <li>開催前 <span>{{ isset($before) ? $before : 0 }}</span>件</li>
@@ -36,7 +42,8 @@
                                         <li>終了 <span>{{ isset($after) ? $after : 0 }}</span>件</li>
                                     </ul>
                                 </th>
-                                <th @if (CpsAuth::user()->user->banner_color) style="background-color: {{ CpsAuth::user()->user->banner_color }}" @else style="background-color: #00A6FF" @endif>
+                                <th
+                                    @if ($banner_color) style="background-color: {{ $banner_color }}" @else style="background-color: #00A6FF" @endif>
                                     <a href="#" class="qb-exhibition-list-open-btn"><span class="arrow"></span></a>
                                 </th>
                             </tr>
@@ -58,8 +65,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($exhibition_group->exhibitions->sortBy('exhibition_id') as $key => $exhibition)
-                                                    <tr class="_link"
-                                                    data-url="">
+                                                    <tr class="_link" data-url="">
                                                         <td class="qb-exhibition-list-id">
                                                             {{ $exhibition_group->order . '-' . sprintf('%02d', $exhibition->order) }}
                                                         </td>
@@ -92,6 +98,15 @@
                                                         <td></td>
                                                     </tr>
                                                 @endforeach
+                                                @if ($exhibition_group->exhibitions->count() < 1)
+                                                    <tr class="row-add-schedule">
+                                                        <th colspan="6">
+                                                            <div>
+                                                                セッション追加の権限がありません。
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -104,7 +119,4 @@
             @endforeach
         @endif
     </div>
-@token
-@scope([
-])
 @endsection

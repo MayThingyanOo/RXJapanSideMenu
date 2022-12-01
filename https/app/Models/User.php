@@ -34,22 +34,9 @@ class User extends BaseModel
         'sso_info',
     ];
 
-
-    protected static $login_statuses = [1 => "ログイン情報送信前", 2 => "ログイン可能", 3 => "無効"];
-
-    public function isLogginable()
-    {
-        return $this->status != 3;
-    }
-
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
-    }
-
-    public function super_user()
-    {
-        return $this->hasOne('App\Models\Staff')->where("is_super_user_flag", true);
     }
 
     public function staff()
@@ -60,15 +47,5 @@ class User extends BaseModel
     public function exhibitions()
     {
         return $this->hasManyThrough('App\Models\Exhibition', 'App\Models\ExhibitionGroup');
-    }
-
-    public function exhibition_groups()
-    {
-        return $this->hasMany('App\Models\ExhibitionGroup');
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 }

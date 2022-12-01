@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\PasswordReminderRequest;
 use App\Http\Requests\SendPasswordReminderMailRequest;
 use App\Services\LoginService;
 use CpsAuth;
 use CpsMail;
+use Hash;
+use Session;
 
 class LoginController extends Controller
 {
-    private $loginService;
+    private $login_service;
 
-    public function __construct(LoginService $loginService)
+    public function __construct(LoginService $login_service)
     {
-        $this->loginService = $loginService;
+        $this->login_service = $login_service;
     }
 
     public function showLogin()
@@ -23,6 +26,8 @@ class LoginController extends Controller
         if (!CpsAuth::setGuard("user_staff")->isGuest()) {
             return redirect(route('get_exhibition_list'));
         }
+
+        Session::forget('staff');
 
         return view('rxjapan.auth.login');
     }
@@ -32,24 +37,30 @@ class LoginController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        $staff = $this->loginService->getStaff($email)->first();
+        $staff = $this->login_service->getStaff($email);
 
-        if ($staff) {
-            $result = CpsAuth::setGuard("user_staff")
-                ->attempt(['email' => $email, 'password' => $password]);
+        if ($staff->staff_pwd_reset_flag && Hash::check($password, $staff->password)) {
+            Session::put("staff", $staff);
+            return redirect(route('get_change_password'));
+        }
 
-            if (!$result) {
-                return redirect(route('get_login'))
-                    ->withErrors(['email' => '認証エラー'])
-                    ->withInput();
-            }
-        } else {
+        $result = $this->checkAuth($email, $password);
+
+        if (!$result) {
             return redirect(route('get_login'))
                 ->withErrors(['email' => '認証エラー'])
                 ->withInput();
         }
 
         return redirect(route('get_exhibition_list'));
+    }
+
+    private function checkAuth($email, $password)
+    {
+        return CpsAuth::setGuard("user_staff")->attempt([
+            'email' => $email,
+            'password' => $password,
+        ]);
     }
 
     public function showReminderMailForm()
@@ -66,10 +77,10 @@ class LoginController extends Controller
                 ->withInput();
         }
 
-        $staff = $this->loginService->getStaff($email)->first();
+        $staff = $this->login_service->getStaff($email);
 
         if ($staff) {
-            $reminder = $this->loginService->createPasswordReminderHashByEmail($email);
+            $reminder = $this->login_service->createPasswordReminderHashByEmail($email);
 
             $body = view("rxjapan.email.forget_password", ['hash' => $reminder->hash]);
             CpsMail::mailTo($email, "【Q-business】ログインパスワード再設定の確認", $body);
@@ -94,7 +105,7 @@ class LoginController extends Controller
         $hash = $request->hash;
         $password = $request->password;
 
-        $this->loginService->remindPassword($hash, $password);
+        $this->login_service->remindPassword($hash, $password);
 
         return redirect(route('get_complete_pw_reminder'));
     }
@@ -109,5 +120,35 @@ class LoginController extends Controller
         CpsAuth::logout();
 
         return redirect(route("get_login"));
+    }
+
+    public function showChangePassword()
+    {
+        if (Session::get('staff') == '') {
+            return redirect(route('get_login'));
+        } else {
+            return view('rxjapan.auth.change_password');
+        }
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $staff = Session::get('staff');
+        $staff_id = $staff->staff_id;
+        $password = $request->new_password;
+
+        $this->login_service->changePassword($password, $staff_id);
+
+        $result = $this->checkAuth($staff->email, $password);
+
+        if (!$result) {
+            return redirect(route('get_login'))
+                ->withErrors(['email' => '認証エラー'])
+                ->withInput();
+        }
+
+        Session::forget('staff');
+
+        return redirect(route('get_exhibition_list'))->with('flash_message', 'パスワードが更新されました。');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StaffMyPageRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +33,7 @@ class StaffMyPageRequest extends FormRequest
     {
         return [
             'name' => '名前',
-            'department_name' => '所属'
+            'department_name' => '所属',
         ];
     }
 }

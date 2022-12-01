@@ -24,7 +24,7 @@ class CpsAuthProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('cpsauthfacade', function () {
-            return new CpsAuth;
+            return new CpsAuth();
         });
 
         $this->app->booting(function () {

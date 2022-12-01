@@ -44,14 +44,14 @@ class PasswordReminderRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 $rules = [
-                    'h' => 'required|max:255|is_used|exists:qpass.staff_password_reminder,hash|is_within_ten_min'
+                    'h' => 'required|max:255|is_used|exists:qpass.staff_password_reminder,hash|is_within_ten_min',
                 ];
 
                 return $rules;
             case 'POST':
                 $rules = [
                     'password' => 'required|max:255|min:8|password_character_used|password_rules|confirmed',
-                    'hash' => 'required|max:255|is_used|exists:qpass.staff_password_reminder,hash|is_within_ten_min'
+                    'hash' => 'required|max:255|is_used|exists:qpass.staff_password_reminder,hash|is_within_ten_min',
                 ];
 
                 return $rules;

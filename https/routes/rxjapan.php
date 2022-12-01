@@ -29,6 +29,8 @@ Route::prefix('user')->group(function () {
             Route::post('/reminder', 'actionRemindPassword')->name('action_remind_password');
             Route::get('/reminder/complete', 'showCompletePasswordReminder')->name('get_complete_pw_reminder');
         });
+        Route::get('/change_password', 'showChangePassword')->name('get_change_password');
+        Route::post('/change_password', 'changePassword')->name('action_change_password');
     });
 
     Route::group(['middleware' => 'auth:user_staff'], function () {
@@ -36,13 +38,13 @@ Route::prefix('user')->group(function () {
             Route::get('/logout', 'logout')->name('get_logout');
         });
         Route::controller(ExhibitionController::class)->group(function () {
-            Route::get('/exhibition', 'showList')->name('get_exhibition_list', 'イベント一覧');
+            Route::get('/exhibition', 'showList')->name('get_exhibition_list');
         });
-        Route::controller(MypageController::class)->group(function () {
-            Route::prefix('mypage')->group(function () {
-                Route::get('', 'showList')->name('get_my_page_list', '');
-                Route::get('/edit', 'showEdit')->name('get_my_page_edit');
-                Route::post('/update', 'actionUpdate')->name('action_update_my_page');
+        Route::controller(ProfileController::class)->group(function () {
+            Route::prefix('profile')->group(function () {
+                Route::get('', 'showList')->name('get_user_profile');
+                Route::get('/edit', 'showEdit')->name('get_profile_edit');
+                Route::post('/update', 'actionUpdate')->name('action_profile_update');
                 Route::get('/password/edit', 'showEditPassword')->name('get_edit_password_form');
                 Route::post('/password/update', 'actionUpdatePassword')->name('action_update_password');
             });

@@ -1,4 +1,4 @@
-@extends('rxjapan.layouts.default',['in_exhibition' => true])
+@extends('rxjapan.layouts.default')
 @section('title', 'アカウント情報')
 @section('content')
 
@@ -6,7 +6,7 @@
         <h1 class="qb-align-center">アカウント情報</h1>
     </div>
     <div class="btn-double-group">
-        <a href="{{ route('get_my_page_edit') }}" class="btn btn-primary btn-confirm btn-edit">編集</a>
+        <a href="{{ route('get_profile_edit') }}" class="btn btn-primary btn-confirm btn-edit">編集</a>
     </div>
     <div class="qb-card-content">
         <table class="qb-form-table">

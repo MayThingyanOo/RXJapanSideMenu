@@ -167,7 +167,6 @@ return [
          */
         App\Lib\CpsMail\CpsMailProvider::class,
         App\Lib\CpsAuth\CpsAuthProvider::class,
-        App\Lib\CpsForm\CpsFormProvider::class,
 
         /*
          * Package Service Providers...

@@ -40,9 +40,6 @@ class Exhibition extends BaseModel
         'exhibition_sso_flag',
     ];
 
-    protected $graph_data_appends = ['date_list', 'fetched_time', 'entry_count', 'exit_count', 'spot_ranking', 'graph_data'];
-
-    private $date_list;
     private $status_name = [1 => "開催前", 2 => "開催中", 3 => "終了"];
 
     public function exhibitionDates()
@@ -62,16 +59,14 @@ class Exhibition extends BaseModel
 
     public function getOpenDateTimeAttribute()
     {
-        $first = $this->exhibitionDates->sortBy('day')
-            ->first();
+        $first = $this->exhibitionDates->sortBy('day')->first();
 
         return $first->day . " " . $first->open_time;
     }
 
     public function getEndDateTimeAttribute()
     {
-        $first = $this->exhibitionDates->sortByDesc('day')
-            ->first();
+        $first = $this->exhibitionDates->sortByDesc('day')->first();
 
         return $first->day . " " . $first->end_time;
     }

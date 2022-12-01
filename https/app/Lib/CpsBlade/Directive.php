@@ -6,17 +6,6 @@ use Illuminate\Support\Str;
 
 class Directive
 {
-
-    public static function dataTable($instance, $arg1 = null, $arg2 = [])
-    {
-        if ($arg1 && is_string($arg1)) {
-            $class = "App\\DataTables\\$arg1";
-            $instance = new $class;
-            return $instance->render($arg2);
-        }
-        return $instance->render($arg1 ?? []);
-    }
-
     public static function css($file)
     {
         $path = static::getCssPath($file);
@@ -42,26 +31,4 @@ class Directive
         }
         return $path;
     }
-
-    public static function readCustomFileIf($file)
-    {
-        $path1 = $file;
-        $content = '';
-        if (!Str::startsWith($path1, '/')) {
-            $path1 = '/customize/' . str_replace('.', '/', $path1) . '.html';
-        }
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path1)) {
-            $content .= file_get_contents($_SERVER['DOCUMENT_ROOT'] . $path1) . ' ';
-        }
-        $path2 = $file;
-        if (!Str::startsWith($path2, '/')) {
-            $path2 = '/customize/' . Str::replaceFirst('.', '/', $path2) . '.html';
-            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path2)) {
-                $content .= file_get_contents($_SERVER['DOCUMENT_ROOT'] . $path2) . ' ';
-            }
-        }
-
-        return $content;
-    }
-
 }
